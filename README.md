@@ -44,8 +44,6 @@ When the project is completed, commit the final changes, sync all pull requests,
 initial driver, navigator: Charles, Hayden
 
 ###### Provide name and approxamite line numbers where each person wrote their code
-Charles: 3-23
+Charles: 1-36, 52-92
 
-Hayden 11, 23-37 <-with help from Charles!
-
-parking_garage-2: Changes Charles
+Hayden 11, 37-52 <-with help from Charles!
