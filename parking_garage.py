@@ -54,13 +54,13 @@ class CarGarage:
         tic_num = input(txt["tic_num_prompt"])
         while True:
             try:
-                if int(tic_num) <= len(self.tickets) or int(tic_num) > self.max_ticket:
+                if int(tic_num) <= 1 or int(tic_num) > self.max_ticket:
                     raise ValueError
                 else:
                     tic_num = int(tic_num)
                     break
             except (ValueError):
-                tic_num = int(input(txt["tic_wrong_prompt"].format(tics_left=len(self.tickets), max_tics=self.max_ticket)))
+                tic_num = int(input(txt["tic_wrong_prompt"].format(tics_left=1, max_tics=self.max_ticket)))
         if self.current_ticket[tic_num]['paid'] == "True Leave Garage":
             print(txt["Thanks"])
             self.parking_spaces.append(tic_num)
