@@ -1,19 +1,4 @@
-text = {
-    "garage_full": "Sorry, our parking garage is full! Please come back soon.",
-    "tic_num_assign":"Your ticket number is {ticket}",
-    "tic_num_prompt": "What is your ticket number? ",
-    "tic_wrong_prompt":"Check that number again. Needs to be between {tics_left} & {max_tics}: ",
-    "Thanks":"""
-                Thank you, have a nice day!""",
-    "payment_needed": "You have not payed yet.",
-    "time_parked_prompt": "And how many hours were you parked today? ",
-    "border":'~='*8,
-    'total': 'Your total for the day is: ${total:.2f}',
-    'leave':"""Lucky you! Our currency acceptance machine is broken and you don't have to pay.\n 
-                    You have 15 minutes to leave!
-                        [Press Enter]""",
-    "time_wrong_prompt": "Sorry, that wasn't a number. Try again.",
-}
+from text_parking_garage import text as txt
 
 class CarGarage:
     def __init__(self, tickets=[i for i in range(1,101)], parking_spaces=[i for i in range(100)], price=1.20):
@@ -27,13 +12,46 @@ class CarGarage:
         if self.tickets:
             ticket=self.tickets.pop()
             self.parking_spaces.pop()
-            print(text["tic_num_assign"].format(ticket=ticket))
+            print(txt["tic_num_assign"].format(ticket=ticket))
             self.current_ticket[ticket] = {"paid": "False in garage", 'price': self.price}
         else:
-            print(text["garage_full"])
+            print(txt["garage_full"])
     
     def pay_for_parking(self):
-        tic_num = input(text["tic_num_prompt"])
+        tic_num = input(txt["tic_num_prompt"])
+        while True:
+            try:
+                if int(tic_num) <= 1 or int(tic_num) > self.max_ticket:
+                    raise ValueError
+                else:
+                    tic_num = int(tic_num)
+                    break
+            except (ValueError):
+                tic_num = int(input(txt["tic_wrong_prompt"].format(tics_left = 1, max_tics=self.max_ticket)))
+        if self.current_ticket[tic_num]['paid'] == "True Leave Garage":
+            print(txt["already_paid"])
+            return
+        else:
+            print(txt["payment_needed"])
+            
+        hours = input(txt["time_parked_prompt"])
+        while True:
+            try:
+                if float(hours): 
+                    total = float(hours)*self.current_ticket[tic_num]["price"]
+                    print(txt["border"])
+                    print(txt['total'].format(total=total))
+                    print(txt["border"])
+                    input(txt["leave"])
+                    self.current_ticket[tic_num]['paid'] = 'True Leave Garage'
+                    print(txt["Thanks"])
+                    self.tickets.append(tic_num)
+                    break
+            except ValueError:
+                hours = input(txt["time_wrong_prompt"])
+
+    def leave_garage(self):
+        tic_num = input(txt["tic_num_prompt"])
         while True:
             try:
                 if int(tic_num) <= len(self.tickets) or int(tic_num) > self.max_ticket:
@@ -42,30 +60,13 @@ class CarGarage:
                     tic_num = int(tic_num)
                     break
             except (ValueError):
-                tic_num = int(input(text["tic_wrong_prompt"].format(tics_left=len(self.tickets), max_tics=self.max_ticket)))
+                tic_num = int(input(txt["tic_wrong_prompt"].format(tics_left=len(self.tickets), max_tics=self.max_ticket)))
         if self.current_ticket[tic_num]['paid'] == "True Leave Garage":
-            print(text["Thanks"])
+            print(txt["Thanks"])
+            self.parking_spaces.append(tic_num)
+            del self.current_ticket[tic_num]
         else:
-            print(text["payment_needed"])
-            
-        hours = input(text["time_parked_prompt"])
-        while True:
-            try:
-                if float(hours): 
-                    total = float(hours)*self.current_ticket[tic_num]["price"]
-                    print(text["border"])
-                    print(text['total'].format(total=total))
-                    print(text["border"])
-
-                    input(text["leave"])
-                    self.current_ticket[tic_num]['paid'] = 'True Leave Garage'
-                    print(text["Thanks"])
-                    self.tickets.append(tic_num)
-                    self.parking_spaces.append(tic_num)
-                    del self.current_ticket[tic_num]
-                    break
-            except ValueError:
-                hours = input(text["time_wrong_prompt"])
+            print(txt["payment_needed2"])
         
     def change_price(self, new_price):
         self.price = new_price
@@ -85,6 +86,12 @@ class CarGarage:
                 self.change_price(new_price)
             elif owner_task == 'tickets':
                 self.check_tickets()
+            elif owner_task == "tt":
+                self.take_ticket()
+            elif owner_task == "pp":
+                self.pay_for_parking()
+            elif owner_task == "lg":
+                self.leave_garage()
             elif owner_task == 'quit':
                 print("Thanks for using our software!\nGoodbye.")
                 break
