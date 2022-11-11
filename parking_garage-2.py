@@ -6,8 +6,9 @@ class CarGarage:
     def __init__(self, tickets=[i for i in range(1,101)], parking_spaces=[i for i in range(100)], price=1.20):
         self.tickets = tickets
         self.parking_spaces = parking_spaces
-        self.current_ticket = {100:{"paid":"False in garage", 'price': "1.20 per hour"}, 99:{"paid":"False in garage", 'price': "1.70 per hour"}}
+        self.current_ticket = {}
         self.price = price
+        self.max_ticket = len(tickets)
         
 
     def take_ticket(self):
@@ -20,16 +21,21 @@ class CarGarage:
             print(text["garage_full"])
     
     def pay_for_parking(self):
+        tic_num = input("What is your ticket number? ")
         while True:
-            tic_num = int(input("What is your ticket number? "))
-            if tic_num in self.tickets:
-                print("Are you sure that's the right number?[Enter]")
-            elif self.current_ticket[tic_num]['paid'] == "True Leave Garage":
-                print("""
-                    Thank you, have a nice day!""")
-            else:
-                print("You have not payed yet.")
-                break
+            try:
+                if int(tic_num) <= len(self.tickets) or int(tic_num) > self.max_ticket:
+                    raise ValueError
+                else:
+                    break
+            except (ValueError):
+                tic_num = int(input(f"Check that number again. Needs to be between {len(self.tickets)} & {self.max_ticket}: "))
+        if self.current_ticket[tic_num]['paid'] == "True Leave Garage":
+            print("""
+                Thank you, have a nice day!""")
+        else:
+            print("You have not payed yet.")
+            
         hours = input("And how many hours were you parked today? ")
         while True:
             try:
