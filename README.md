@@ -41,8 +41,8 @@ When the project is completed, commit the final changes, sync all pull requests,
 
 
 ###### List group responsiblities below:
-
+initial driver, navigator: Charles, Hayden
 
 ###### Provide name and approxamite line numbers where each person wrote their code
-
+Charles: 3-
 
