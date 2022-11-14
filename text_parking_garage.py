@@ -14,5 +14,18 @@ text = {
                         [Press Enter]""",
     "time_wrong_prompt": "Sorry, that wasn't a number. Try again.",
     "payment_needed2": "Find the nearest self-service kiosk and pay for the ticket.",
-    "already_paid": "You have already paid."
+    "already_paid": "You have already paid.",
+    'user_thanks': "Thanks for using our software!\nGoodbye.",
+    'user_error': "Whoops, we didn't recognize that. Try again. [Enter]",
+    'new_price': "And what would you like the new price to be? ",
+    'user_prompt': 'What would you like to do? (Change [Price]/ Check [Tickets]/ Check [Spots] available/ Quit) ',
+    'spots_left': "\nYou have {cnt} spots left in your garage.",
+    'oustanding_tickets': "\nYour outstanding tickets are:",
+    'price_change_successful': "Price successfully changed! \nNew price: ${price} per hour."
+
+}
+
+
+input_options = {
+    'quit':['quit','q','qu', 'exit','force quit', ]
 }
