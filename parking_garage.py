@@ -90,9 +90,7 @@ class CarGarage:
                 print(f'{tic_num}')
 
     def check_spots(self):
-        cnt= 0
-        for spots in self.current_ticket.keys():
-            cnt += 1
+        cnt= len(self.current_ticket)
         print(txt['spots_left'].format(cnt=self.max_ticket-cnt))
 
     def owner_interface(self):
