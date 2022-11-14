@@ -101,15 +101,15 @@ class CarGarage:
             if owner_task == 'price':
                 new_price = input(txt['new_price'])
                 self.change_price(new_price)
-            elif owner_task == 'tickets' :
+            elif owner_task in i_o['tickets']:
                 self.check_tickets()
-            elif owner_task == 'spots':
+            elif owner_task in i_o['spots']:
                 self.check_spots()
-            elif owner_task == "tt":
+            elif owner_task in i_o['take ticket']:
                 self.take_ticket()
-            elif owner_task == "pp":
+            elif owner_task in i_o['pay for parking']:
                 self.pay_for_parking()
-            elif owner_task == "lg":
+            elif owner_task in i_o['leave garage']:
                 self.leave_garage()
             elif owner_task in i_o['quit']:
                 print(txt['user_thanks'])

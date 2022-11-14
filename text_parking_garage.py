@@ -27,5 +27,10 @@ text = {
 
 
 input_options = {
+    'tickets':['tickets', 'ticket', 'tick', 't',],
+    'spots':['spots', 'spot', 'space', 'spaces', 'parking spots', 'parking', 's',],
+    'take ticket':['take ticket', 'take', 'give ticket', 'tt',],
+    'pay for parking':['pay for parking', 'pay', 'buy', 'pay parking', 'pay for spot', 'pp'],
+    'leave garage':['leave', 'leave garage', 'l', 'lv', 'leaving', 'lg'],
     'quit':['quit','q','qu', 'exit','force quit', ]
 }
