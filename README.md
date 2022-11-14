@@ -48,5 +48,5 @@ Charles:
 text_parking_garage: 1-15
 parking_garage: 3-19, 37-51, 71-88, 95-113
 Hayden:
-text_parking_garage: 16-17
+text_parking_garage: 16-17, 29-35
 parking_garage: 20-35, 53-69, 89-94
